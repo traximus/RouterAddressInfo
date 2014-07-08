@@ -21,6 +21,8 @@
 		03702C88196BD0D800D27353 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03702C6A196BD0D800D27353 /* UIKit.framework */; };
 		03702C90196BD0D800D27353 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03702C8E196BD0D800D27353 /* InfoPlist.strings */; };
 		03702C92196BD0D800D27353 /* RouterAddressInformationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03702C91196BD0D800D27353 /* RouterAddressInformationTests.m */; };
+		03702C9E196BD12000D27353 /* RouterAddressInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 03702C9D196BD12000D27353 /* RouterAddressInfo.m */; };
+		03702CA1196BD2AA00D27353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03702CA0196BD2AA00D27353 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		03702C8D196BD0D800D27353 /* RouterAddressInformationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RouterAddressInformationTests-Info.plist"; sourceTree = "<group>"; };
 		03702C8F196BD0D800D27353 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		03702C91196BD0D800D27353 /* RouterAddressInformationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RouterAddressInformationTests.m; sourceTree = "<group>"; };
+		03702C9C196BD12000D27353 /* RouterAddressInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouterAddressInfo.h; sourceTree = "<group>"; };
+		03702C9D196BD12000D27353 /* RouterAddressInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouterAddressInfo.m; sourceTree = "<group>"; };
+		03702C9F196BD14000D27353 /* route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
+		03702CA0196BD2AA00D27353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03702CA1196BD2AA00D27353 /* SystemConfiguration.framework in Frameworks */,
 				03702C69196BD0D800D27353 /* CoreGraphics.framework in Frameworks */,
 				03702C6B196BD0D800D27353 /* UIKit.framework in Frameworks */,
 				03702C67196BD0D800D27353 /* Foundation.framework in Frameworks */,
@@ -82,6 +89,7 @@
 		03702C5A196BD0D800D27353 = {
 			isa = PBXGroup;
 			children = (
+				03702C9B196BD12000D27353 /* RouterAddress */,
 				03702C6C196BD0D800D27353 /* RouterAddressInformation */,
 				03702C8B196BD0D800D27353 /* RouterAddressInformationTests */,
 				03702C65196BD0D800D27353 /* Frameworks */,
@@ -101,6 +109,7 @@
 		03702C65196BD0D800D27353 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				03702CA0196BD2AA00D27353 /* SystemConfiguration.framework */,
 				03702C66196BD0D800D27353 /* Foundation.framework */,
 				03702C68196BD0D800D27353 /* CoreGraphics.framework */,
 				03702C6A196BD0D800D27353 /* UIKit.framework */,
@@ -150,6 +159,16 @@
 				03702C8E196BD0D800D27353 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03702C9B196BD12000D27353 /* RouterAddress */ = {
+			isa = PBXGroup;
+			children = (
+				03702C9F196BD14000D27353 /* route.h */,
+				03702C9C196BD12000D27353 /* RouterAddressInfo.h */,
+				03702C9D196BD12000D27353 /* RouterAddressInfo.m */,
+			);
+			path = RouterAddress;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03702C7D196BD0D800D27353 /* ViewController.m in Sources */,
+				03702C9E196BD12000D27353 /* RouterAddressInfo.m in Sources */,
 				03702C77196BD0D800D27353 /* AppDelegate.m in Sources */,
 				03702C73196BD0D800D27353 /* main.m in Sources */,
 			);
@@ -379,6 +399,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RouterAddressInformation/RouterAddressInformation-Prefix.pch";
 				INFOPLIST_FILE = "RouterAddressInformation/RouterAddressInformation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -392,6 +413,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RouterAddressInformation/RouterAddressInformation-Prefix.pch";
 				INFOPLIST_FILE = "RouterAddressInformation/RouterAddressInformation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
