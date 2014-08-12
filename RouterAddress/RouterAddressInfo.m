@@ -28,7 +28,16 @@
 #import <ctype.h>
 #import <sys/param.h>
 #import  <sys/sysctl.h>
-#import "route.h" /*the very same from google-code*/
+
+
+#if TARGET_IPHONE_SIMULATOR
+#include <net/route.h>
+#else
+#include "route.h"  /*the very same from google-code*/
+#endif
+
+
+
 
 
 #define CTL_NET         4               /* network, see socket.h */
