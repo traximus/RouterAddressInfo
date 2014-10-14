@@ -29,15 +29,11 @@
 #import <sys/param.h>
 #import  <sys/sysctl.h>
 
-
 #if TARGET_IPHONE_SIMULATOR
 #include <net/route.h>
 #else
 #include "route.h"  /*the very same from google-code*/
 #endif
-
-
-
 
 
 #define CTL_NET         4               /* network, see socket.h */
@@ -53,7 +49,8 @@
 
 @implementation RouterAddressInfo
 
-//1. get local router information - local ip, gateway, netmask, broadcast address, interface, etc.
+// 1. get local router information
+//    - local ip, gateway, netmask, broadcast address, interface, etc.
 +(NSMutableDictionary *)getRouterInfo
 {
     NSMutableDictionary *addressInfo = [NSMutableDictionary dictionary];
@@ -87,7 +84,7 @@
                         //getway
                         in_addr_t i =inet_addr([localAddress cStringUsingEncoding:NSUTF8StringEncoding]);
                         in_addr_t* x =&i;
-                        NSString *gatewayAddress = getDefaultGateway(x);
+                        NSString *gatewayAddress = [RouterAddressInfo getDefaultGateway:x withLocalAddress:localAddress];
                         if (gatewayAddress) {
                             [addressInfo setObject:gatewayAddress forKey:@"gateway"];
                         }
@@ -115,8 +112,12 @@
 }
 
 
-//2. get default gateway address - 192.168.1.1
-NSString *getDefaultGateway(in_addr_t * addr)
+
+
+//2. get default gateway address -> 192.168.1.19 - 192.168.1.1
+// here we assume the first part of gateway address is the same like local address;
+
++(NSString *)getDefaultGateway:(in_addr_t *) addr withLocalAddress:(NSString *)localAddress
 {
     NSString *result = nil;
     
@@ -164,7 +165,10 @@ NSString *getDefaultGateway(in_addr_t * addr)
                 }
                 
                 if(((struct sockaddr_in *)sa_tab[RTAX_DST])->sin_addr.s_addr == 0) {
-                    if(octet[0] == 192 && octet[1] == 168){
+                    NSArray *componts = [localAddress componentsSeparatedByString:@"."];
+                    NSString *hrefOfLocalAddress = [componts objectAtIndex:0];
+                    //assume the fitst part of gateway address is same like local address
+                    if(octet[0] == [hrefOfLocalAddress integerValue]){
                         *addr = ((struct sockaddr_in *)(sa_tab[RTAX_GATEWAY]))->sin_addr.s_addr;
                         result = [NSString stringWithFormat:@"%d.%d.%d.%d",octet[0],octet[1],octet[2],octet[3]];
                     }
