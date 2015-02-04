@@ -3,7 +3,7 @@
 //  RouterAddressInformationTests
 //
 //  Created by traximus on 14-7-8.
-//  Copyright (c) 2014年 netcoretec. All rights reserved.
+//  Copyright (c) 2014年 traximus. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
