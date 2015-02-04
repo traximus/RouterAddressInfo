@@ -16,6 +16,7 @@
 
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *localAddressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *netmaskLabel;
 @property (weak, nonatomic) IBOutlet UILabel *interfaceLabel;
@@ -60,11 +61,16 @@
     NSMutableDictionary *routerInfo = [RouterAddressInfo getRouterInfo];
     NSLog(@"router info: %@",routerInfo);
     
+#if TARGET_IPHONE_SIMULATOR
+    _typeLabel.text         = [_typeLabel.text stringByAppendingString:@"simulator"];
+#else
+    _typeLabel.text         = [_typeLabel.text stringByAppendingString:[routerInfo objectForKey:@"type"]];
+#endif
     _localAddressLabel.text = [_localAddressLabel.text stringByAppendingString:[routerInfo objectForKey:@"local"]];
-    _gatewayLabel.text = [_gatewayLabel.text stringByAppendingString:[routerInfo objectForKey:@"gateway"]];
-    _broadcastLabel.text = [_broadcastLabel.text stringByAppendingString:[routerInfo objectForKey:@"broadcast"]];
-    _netmaskLabel.text = [_netmaskLabel.text stringByAppendingString:[routerInfo objectForKey:@"netmask"]];
-    _interfaceLabel.text = [_interfaceLabel.text stringByAppendingString:[routerInfo objectForKey:@"interface"]];
+    _gatewayLabel.text      = [_gatewayLabel.text stringByAppendingString:[routerInfo objectForKey:@"gateway"]];
+    _broadcastLabel.text    = [_broadcastLabel.text stringByAppendingString:[routerInfo objectForKey:@"broadcast"]];
+    _netmaskLabel.text      = [_netmaskLabel.text stringByAppendingString:[routerInfo objectForKey:@"netmask"]];
+    _interfaceLabel.text    = [_interfaceLabel.text stringByAppendingString:[routerInfo objectForKey:@"interface"]];
     
     
     //2. current wifi information

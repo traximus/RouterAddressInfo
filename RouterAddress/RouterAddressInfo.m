@@ -46,11 +46,21 @@
 
 
 
+#define Interface_WiFi          @"wifi"
+#define Interface_Cellular      @"cellular"
+
+
+
+
+
 
 @implementation RouterAddressInfo
 
-// 1. get local router information
-//    - local ip, gateway, netmask, broadcast address, interface, etc.
+/*1. get local router information
+     - local ip, gateway, netmask, broadcast address, interface, etc.(IPV4 address)
+     - when using cellular network, I'm only sure that the ip address is correct,
+       and I can not confirm other informations
+ */
 +(NSMutableDictionary *)getRouterInfo
 {
     NSMutableDictionary *addressInfo = [NSMutableDictionary dictionary];
@@ -71,8 +81,16 @@
             {
                 // check if interface is en0 - 在iPhone上表示WiFi连接
                 /* internetwork: UDP, TCP, etc. */
-                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"])
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"pdp_ip0"]||
+                   [[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"])
                 {
+                    if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"pdp_ip0"]) {
+                        [addressInfo setObject:Interface_Cellular forKey:@"type"];
+                    }
+                    else if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]){
+                        [addressInfo setObject:Interface_WiFi forKey:@"type"];
+                    }
+                    
                     //local address
                     NSString *localAddress = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
                     NSString *broadcastAddress = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_dstaddr)->sin_addr)];

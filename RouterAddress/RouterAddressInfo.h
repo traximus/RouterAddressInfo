@@ -13,7 +13,11 @@
 @interface RouterAddressInfo : NSObject
 
 
-//1. get local router information - local ip, gateway, netmask, broadcast address, interface, etc.
+/*1. get local router information
+     - local ip, gateway, netmask, broadcast address, interface, etc.(IPV4 address)
+     - when using cellular network, I'm only sure that the ip address is correct,
+       and I can not confirm other informations
+ */
 +(NSMutableDictionary *)getRouterInfo;
 
 

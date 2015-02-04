@@ -10,29 +10,29 @@
 	<string>RouterAddressInformation</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>DDCF7DEF-62DE-4815-9548-6AA0023CFDB5</key>
+		<key>673ACAE94183D0D21611D730105BC2BFAD7E0D26</key>
 		<string>https://github.com/traximus/RouterAddressInfo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>RouterAddressInformation.xcodeproj/project.xcworkspace</string>
+	<string>RouterAddressInformation.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DDCF7DEF-62DE-4815-9548-6AA0023CFDB5</key>
+		<key>673ACAE94183D0D21611D730105BC2BFAD7E0D26</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/traximus/RouterAddressInfo.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DDCF7DEF-62DE-4815-9548-6AA0023CFDB5</string>
+	<string>673ACAE94183D0D21611D730105BC2BFAD7E0D26</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DDCF7DEF-62DE-4815-9548-6AA0023CFDB5</string>
+			<string>673ACAE94183D0D21611D730105BC2BFAD7E0D26</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RouterAddressInfo</string>
 		</dict>
