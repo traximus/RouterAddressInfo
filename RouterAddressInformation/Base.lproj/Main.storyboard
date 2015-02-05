@@ -59,6 +59,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juP-dx-McN">
+                                <rect key="frame" x="236" y="49" width="68" height="30"/>
+                                <state key="normal" title="cell">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="typeBtnPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KqX-Mc-gF8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -68,6 +77,7 @@
                         <outlet property="interfaceLabel" destination="aMH-Ah-Fsc" id="PT9-pf-p0P"/>
                         <outlet property="localAddressLabel" destination="xZD-g7-HeW" id="dZf-WR-fVq"/>
                         <outlet property="netmaskLabel" destination="RBP-pp-tNn" id="b3C-vU-LDf"/>
+                        <outlet property="typeBtn" destination="juP-dx-McN" id="7I2-zf-y8Q"/>
                         <outlet property="typeLabel" destination="b73-mF-SQI" id="amK-Cq-zX6"/>
                     </connections>
                 </viewController>

@@ -46,9 +46,9 @@
 
 
 
-#define Interface_WiFi          @"wifi"
-#define Interface_Cellular      @"cellular"
 
+#define Interface_WiFi                 @"en0"
+#define Interface_Cellular             @"pdp_ip0"
 
 
 
@@ -63,33 +63,26 @@
  */
 +(NSMutableDictionary *)getRouterInfo
 {
-    NSMutableDictionary *addressInfo = [NSMutableDictionary dictionary];
+    NSMutableDictionary *routerInfo = [NSMutableDictionary dictionary];
     struct ifaddrs *interfaces = NULL;
     struct ifaddrs *temp_addr = NULL;
     int success = 0;
     
     // get cueernt interface - 0 success
     success = getifaddrs(&interfaces);
-    if (success == 0)
-    {
+    if (success == 0){
         // Loop through linked list of interfaces
         temp_addr = interfaces;
         
-        while(temp_addr != NULL)
-        {
-            if(temp_addr->ifa_addr->sa_family == AF_INET)
-            {
-                // check if interface is en0 - 在iPhone上表示WiFi连接
+        while(temp_addr != NULL){
+            if(temp_addr->ifa_addr->sa_family == AF_INET){
                 /* internetwork: UDP, TCP, etc. */
-                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"pdp_ip0"]||
-                   [[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"])
-                {
-                    if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"pdp_ip0"]) {
-                        [addressInfo setObject:Interface_Cellular forKey:@"type"];
-                    }
-                    else if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]){
-                        [addressInfo setObject:Interface_WiFi forKey:@"type"];
-                    }
+                
+                //just get cellular||wifi info
+                if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:Interface_WiFi]||
+                    [[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:Interface_Cellular]) {
+                    
+                    NSMutableDictionary *addressInfo = [NSMutableDictionary dictionary];
                     
                     //local address
                     NSString *localAddress = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
@@ -116,9 +109,20 @@
                     if (interface) {
                         [addressInfo setObject:interface forKey:@"interface"];
                     }
+                    
+                    //save addressinfo into routerinfo
+                    if ([addressInfo count]>0) {
+                        if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:Interface_WiFi]) {
+                            [addressInfo setObject:kTypeInfoKeyWifi forKey:@"type"];
+                            [routerInfo setObject:addressInfo forKey:kTypeInfoKeyWifi];
+                        }
+                        else if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:Interface_Cellular]) {
+                            [addressInfo setObject:kTypeInfoKeyCellular forKey:@"type"];
+                            [routerInfo setObject:addressInfo forKey:kTypeInfoKeyCellular];
+                        }
+                    }
                 }
             }
-            
             temp_addr = temp_addr->ifa_next;
         }
     }
@@ -126,7 +130,7 @@
     // Free memory
     freeifaddrs(interfaces);
     
-    return addressInfo;
+    return routerInfo;
 }
 
 

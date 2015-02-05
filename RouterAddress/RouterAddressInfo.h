@@ -10,6 +10,13 @@
 
 
 
+#define kTypeInfoKeyWifi               @"wifi"
+#define kTypeInfoKeyCellular           @"cellular"
+
+
+
+
+
 @interface RouterAddressInfo : NSObject
 
 
